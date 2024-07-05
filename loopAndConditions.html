@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Input Example</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .container {
+        margin-top: 50px;
+        
+    }
+    .container2 {
+        margin-top: 10px;
+        
+    }
+    .functionWidget {
+        padding: 10px;
+        background-color: rgb(92, 212, 212);
+    }
+    .switchCaseWidget {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: rgb(195, 157, 242);
+    }
+
+    .mathTableWidget {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: rgb(153, 189, 231);
+    }
+    input {
+        width: 150px;
+        padding: 10px;
+        font-size: 16px;
+        text-align: center;
+    }
+    #result {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        margin-right: 10px;
+        background-color: whitesmoke;
+    }
+</style>
+</head>
+<body>
+<div class="functionWidget">
+    <h3> Function and If-else Condition Real Time HW :</h3>
+    <p> Please Enter only positive Numbers 😊 </p>
+
+    <div class="container">
+        <input type="number" id="num1" placeholder="Enter number">
+        <input type="number" id="num2" placeholder="Enter number">
+    </div>
+    <div class="container2">
+        <button onclick="updateResult()">Submit</button>
+        <button onclick="clearInputs()">Clear</button>
+        <p id="result"></p>
+    </div>
+</div>
+<div class="switchCaseWidget">
+    <h3> Function and switch case Real Time HW :</h3>
+    <h4>Age Classifier</h4>
+    <p> Please Enter only correct age values 😊 </p>
+    <p>Enter your age</p>
+    <div>
+        <input type="number" id="ageInput" placeholder="Enter your age">
+    </div>
+    <div>
+        <button onclick="classifyAge()">Classify</button>
+        <button onclick="clearAge()">Clear</button>
+    </div>
+    <p id="ageResult"></p>
+</div>
+
+<div class="mathTableWidget">
+    <h3> For and While Loop Real Time HW :</h3>
+    <h4>Math Table Generator</h4>
+    <p>Enter a number:</p>
+    <input type="number" id="numInput" placeholder="Enter a number">
+    <br>
+    <button onclick="generateTable()">Generate Table</button>
+    <button onclick="clearTable()">Clear</button>
+    
+    <div id="mathTableBox">
+    </div>
+</div>
+
+    <script>
+        const num1 = document.getElementById('num1');
+        const num2 = document.getElementById('num2');
+        const result = document.getElementById('result');
+
+
+        function updateResult() {
+            const n1 = num1.value || 0;
+            const n2 = num2.value || 0;
+
+            let maxNumber;
+
+            if(n1 > n2)
+            {
+                maxNumber = n1;
+                result.textContent = `The highest number entered is: ${maxNumber}`;
+            }
+            else
+            {
+                maxNumber = n2;
+                result.textContent = `The highest number entered is: ${maxNumber}`;
+            }
+            
+        }
+
+        function clearInputs() {
+            num1.value = '';
+            num2.value = '';
+            result.textContent = '';
+        }
+
+        
+
+
+        function classifyAge() {
+            const age = parseInt(document.getElementById('ageInput').value);
+
+            let message;
+
+            switch (true) {
+                case (age >= 0 && age <= 2):
+                    message = "You are a baby.";
+                    break;
+                case (age >= 3 && age <= 12):
+                    message = "You are a child.";
+                    break;
+                case (age >= 13 && age <= 19):
+                    message = "You are a teenager.";
+                    break;
+                case (age >= 20 && age <= 64):
+                    message = "You are an adult.";
+                    break;
+                case (age >= 65):
+                    message = "You are a senior citizen.";
+                    break;
+                default:
+                    message = "Please enter a valid age.";
+            }
+
+            document.getElementById('ageResult').textContent = message;
+        }
+
+        function clearAge() {
+            document.getElementById('ageInput').value = '';
+            document.getElementById('ageResult').textContent = '';
+        }
+
+        function generateTable() {
+            const num = parseInt(document.getElementById('numInput').value);
+            const multiplesContainer = document.getElementById('mathTableBox');
+            
+            multiplesContainer.innerHTML = '';
+
+            let multiplesText = '<br>First 10 multiplications - for loop concepts and <br>Next 10 multiplication as While loop concept <br><br>';
+            let i = 0;
+            for (i = 1; i <= 10; i++) {
+                const multiple = i * num;
+                multiplesText += `${i} * ${num} = ${multiple}<br>`;
+            }
+            while(i <= 20)
+            {
+                const multiple = i * num;
+                multiplesText += `${i} * ${num} = ${multiple}<br>`;
+                i++;
+            }
+
+            multiplesContainer.innerHTML = multiplesText;
+        }
+
+        function clearTable()
+        {
+            document.getElementById('numInput').value = '';
+            document.getElementById('mathTableBox').textContent = '';
+        }
+    </script>
+</body>
+</html>
