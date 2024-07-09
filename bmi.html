@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator Comparison</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            height: 100vh;
+            align-items: center;
+        }
+        .dual_screen {
+            width: 35%;
+            min-width: 300px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 5px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dual_screen">
+            <h2>Person 1</h2>
+            <div class="input-group">
+                <label for="name1">Name:</label>
+                <input type="text" id="name1" name="name1">
+            </div>
+            <div class="input-group">
+                <label for="height1">Height (cm):</label>
+                <input type="number" id="height1" name="height1">
+            </div>
+            <div class="input-group">
+                <label for="weight1">Weight (kg):</label>
+                <input type="number" id="weight1" name="weight1">
+            </div>
+        </div>
+        <div class="dual_screen">
+            <h2>Person 2</h2>
+            <div class="input-group">
+                <label for="name2">Name:</label>
+                <input type="text" id="name2" name="name2">
+            </div>
+            <div class="input-group">
+                <label for="height2">Height (cm):</label>
+                <input type="number" id="height2" name="height2">
+            </div>
+            <div class="input-group">
+                <label for="weight2">Weight (kg):</label>
+                <input type="number" id="weight2" name="weight2">
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <button onclick="validateForm()">Submit</button>
+        <p class="error" id="error-message"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name1 = document.getElementById('name1').value;
+            const height1 = document.getElementById('height1').value;
+            const weight1 = document.getElementById('weight1').value;
+            const name2 = document.getElementById('name2').value;
+            const height2 = document.getElementById('height2').value;
+            const weight2 = document.getElementById('weight2').value;
+            
+            if (!name1 || !height1 || !weight1 || !name2 || !height2 || !weight2) {
+                alert("All Fields are required");    
+            } else {
+                const bmi1 = calculateBMIValue(height1, weight1);
+            const bmi2 = calculateBMIValue(height2, weight2);
+
+            let resultText = `${name1}'s BMI: ${bmi1.toFixed(2)}. ${name2}'s BMI: ${bmi2.toFixed(2)}. `;
+
+            if (bmi1 < bmi2) {
+                resultText += `${name1} has a lower BMI (lower obesity).`;
+            } else if (bmi2 < bmi1) {
+                resultText += `${name2} has a lower BMI (lower obesity).`;
+            } else {
+                resultText += `Both have the same BMI.`;
+            }
+
+            alert(resultText);
+            }
+        }
+
+        function calculateBMIValue(height, weight) {
+            // BMI Formula: weight (kg) / (height (m) * height (m))
+            const heightMeters = height / 100; // Convert cm to meters
+            return weight / (heightMeters * heightMeters);
+        }
+    </script>
+</body>
+</html>
