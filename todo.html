@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 300px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .card button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+<body>
+    <h1>TO-DO List</h1>
+    <div>
+    <input type="text" id="wordInput" placeholder="Enter the new task">
+    <button onclick="addCard()">Add</button>
+</div>
+    <div id="cardContainer"></div>
+
+    <script>
+        function addCard() {
+            const userInput = document.getElementById('wordInput');
+            const word = userInput.value.trim();
+
+            if (word) {
+                const cardContainer = document.getElementById('cardContainer');
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const cardName = document.createElement('span');
+                cardName.textContent = word;
+
+                const deleteTextButton = document.createElement('button');
+                deleteTextButton.textContent = 'Remove';
+                deleteTextButton.onclick = function() {
+                    cardContainer.removeChild(card);
+                };
+
+                card.appendChild(cardName);
+                card.appendChild(deleteTextButton);
+                cardContainer.appendChild(card);
+
+                wordInput.value = '';
+            }
+            else
+            {
+                alert("Please enter non empty field!!")
+            }
+        }
+    </script>
+</body>
+</html>
